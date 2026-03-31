@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import { Code2, Lightbulb, Rocket, Heart } from "lucide-react";
+import { Monitor, Database, Smartphone, BrainCircuit } from "lucide-react";
 
-const highlights = [
-  { icon: Code2, title: "Clean Code", desc: "Writing maintainable, scalable solutions" },
-  { icon: Lightbulb, title: "Problem Solver", desc: "Turning ideas into working products" },
-  { icon: Rocket, title: "Fast Learner", desc: "Constantly exploring new technologies" },
-  { icon: Heart, title: "User Focused", desc: "Building for people, not just machines" },
+const professionalExpertise = [
+  { icon: Monitor, title: "Full Stack Development", desc: "End-to-end web applications with modern frameworks and scalable architectures." },
+  { icon: Database, title: "Backend API Architecture", desc: "RESTful APIs, database design, and server-side logic with Node.js & Django." },
+  { icon: Smartphone, title: "Mobile + Web Solutions", desc: "Cross-platform mobile apps and responsive progressive web applications." },
+  { icon: BrainCircuit, title: "Machine Learning", desc: "Data-driven solutions with Python, model training, and intelligent automation." },
 ];
 
 const AboutSection = () => {
@@ -51,7 +51,7 @@ const AboutSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-2 gap-4">
-          {highlights.map((item, i) => (
+          {professionalExpertise.map((item, i) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 20 }}

@@ -20,12 +20,14 @@ const ExploringSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
+        className="text-center"
       >
-        <h2 className="text-3xl sm:text-4xl font-bold mb-2 flex items-center gap-3">
+        <p className="text-sm text-muted-foreground uppercase tracking-widest mb-2">What's Next</p>
+        <h2 className="text-3xl sm:text-4xl font-bold mb-2 inline-flex items-center gap-3">
           Currently <span className="gradient-text-accent">Exploring</span>
           <Sparkles className="text-accent" size={28} />
         </h2>
-        <div className="w-16 h-1 bg-accent rounded-full mb-10" />
+        <div className="w-16 h-1 bg-accent rounded-full mb-10 mx-auto" />
       </motion.div>
 
       <div className="flex flex-wrap gap-4 justify-center max-w-3xl mx-auto">

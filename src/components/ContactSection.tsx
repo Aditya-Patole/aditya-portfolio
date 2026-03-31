@@ -1,16 +1,18 @@
 import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
-import { Send, Github, Linkedin, Mail } from "lucide-react";
+import { Send } from "lucide-react";
 
 const ContactSection = () => {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // Placeholder – wire up later
     alert("Thanks for reaching out! I'll get back to you soon.");
-    setForm({ name: "", email: "", message: "" });
+    setForm({ name: "", email: "", subject: "", message: "" });
   };
+
+  const inputClass =
+    "w-full px-4 py-3 rounded-lg bg-muted border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all duration-300 text-sm";
 
   return (
     <section id="contact" className="section-padding">
@@ -19,9 +21,11 @@ const ContactSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
+        className="text-center"
       >
-        <h2 className="text-3xl sm:text-4xl font-bold mb-2 text-center">
-          Get In <span className="gradient-text">Touch</span>
+        <p className="text-sm text-muted-foreground uppercase tracking-widest mb-2">Let's Connect</p>
+        <h2 className="text-3xl sm:text-4xl font-bold mb-2">
+          Contact <span className="gradient-text">Me</span>
         </h2>
         <div className="w-16 h-1 bg-primary rounded-full mb-10 mx-auto" />
       </motion.div>
@@ -41,7 +45,7 @@ const ContactSection = () => {
               required
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg bg-muted border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-sm"
+              className={inputClass}
               placeholder="Your name"
             />
           </div>
@@ -52,8 +56,19 @@ const ContactSection = () => {
               required
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg bg-muted border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-sm"
+              className={inputClass}
               placeholder="you@email.com"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">Subject</label>
+            <input
+              type="text"
+              required
+              value={form.subject}
+              onChange={(e) => setForm({ ...form, subject: e.target.value })}
+              className={inputClass}
+              placeholder="What's this about?"
             />
           </div>
           <div>
@@ -63,7 +78,7 @@ const ContactSection = () => {
               rows={4}
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg bg-muted border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-sm resize-none"
+              className={`${inputClass} resize-none`}
               placeholder="What's on your mind?"
             />
           </div>
@@ -75,26 +90,6 @@ const ContactSection = () => {
             Send Message
           </button>
         </form>
-
-        {/* Socials */}
-        <div className="flex justify-center gap-6 mt-8">
-          {[
-            { icon: Github, href: "https://github.com/", label: "GitHub" },
-            { icon: Linkedin, href: "https://linkedin.com/", label: "LinkedIn" },
-            { icon: Mail, href: "mailto:aditya@example.com", label: "Email" },
-          ].map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={s.label}
-              className="w-11 h-11 rounded-lg glass-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-300"
-            >
-              <s.icon size={20} />
-            </a>
-          ))}
-        </div>
       </motion.div>
     </section>
   );

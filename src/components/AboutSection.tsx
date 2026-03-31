@@ -16,15 +16,16 @@ const AboutSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
+        className="text-center"
       >
+        <p className="text-sm text-muted-foreground uppercase tracking-widest mb-2">Discover More</p>
         <h2 className="text-3xl sm:text-4xl font-bold mb-2">
           About <span className="gradient-text">Me</span>
         </h2>
-        <div className="w-16 h-1 bg-primary rounded-full mb-10" />
+        <div className="w-16 h-1 bg-primary rounded-full mb-10 mx-auto" />
       </motion.div>
 
       <div className="grid lg:grid-cols-2 gap-12 items-start">
-        {/* Story */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -34,22 +35,21 @@ const AboutSection = () => {
         >
           <h3 className="text-xl font-semibold text-foreground">My Journey</h3>
           <p className="text-muted-foreground leading-relaxed">
-            I'm a passionate Full Stack Developer who fell in love with programming through 
-            building small tools and automating everyday tasks. What started as curiosity 
+            I'm a passionate Full Stack Developer who fell in love with programming through
+            building small tools and automating everyday tasks. What started as curiosity
             quickly turned into a career dedicated to crafting meaningful digital products.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Today, I focus on building modern web applications with React, Node.js, and 
-            cloud technologies. I believe the best software is built at the intersection 
+            Today, I focus on building modern web applications with React, Node.js, and
+            cloud technologies. I believe the best software is built at the intersection
             of great engineering and thoughtful design.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            When I'm not coding, you'll find me exploring open-source projects, learning 
+            When I'm not coding, you'll find me exploring open-source projects, learning
             about system design, or experimenting with new frameworks and tools.
           </p>
         </motion.div>
 
-        {/* Highlight cards */}
         <div className="grid grid-cols-2 gap-4">
           {highlights.map((item, i) => (
             <motion.div

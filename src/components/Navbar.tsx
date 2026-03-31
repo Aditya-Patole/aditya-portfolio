@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -32,6 +32,13 @@ const Navbar = () => {
               {item.label}
             </a>
           ))}
+          <a
+            href="#"
+            className="btn-primary-gradient inline-flex items-center gap-2 !px-4 !py-2 text-sm"
+          >
+            <Download size={15} />
+            Resume
+          </a>
         </div>
 
         {/* Mobile toggle */}
@@ -63,6 +70,14 @@ const Navbar = () => {
                   {item.label}
                 </a>
               ))}
+              <a
+                href="#"
+                onClick={() => setMobileOpen(false)}
+                className="btn-primary-gradient inline-flex items-center gap-2 justify-center text-sm"
+              >
+                <Download size={15} />
+                Resume
+              </a>
             </div>
           </motion.div>
         )}

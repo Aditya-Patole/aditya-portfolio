@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Briefcase, Mail } from "lucide-react";
+import { Briefcase, Mail } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
       {/* Animated background blobs */}
       <div className="absolute inset-0 hero-bg" />
       <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/5 rounded-full blur-3xl floating" />
@@ -46,7 +46,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-muted-foreground mb-10 max-w-lg mx-auto"
         >
-          I craft digital experiences that blend clean code with thoughtful design. 
+          I craft digital experiences that blend clean code with thoughtful design.
           Turning complex problems into elegant, user-friendly solutions.
         </motion.p>
 
@@ -68,17 +68,24 @@ const HeroSection = () => {
             Contact Me
           </a>
         </motion.div>
-
-        <motion.a
-          href="#about"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-muted-foreground animate-bounce"
-        >
-          <ArrowDown size={24} />
-        </motion.a>
       </div>
+
+      {/* Mouse scroll indicator */}
+      <motion.a
+        href="#about"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
+        <div className="w-7 h-11 rounded-full border-2 border-muted-foreground/50 flex items-start justify-center p-1.5">
+          <motion.div
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-1.5 h-1.5 rounded-full bg-primary"
+          />
+        </div>
+      </motion.a>
     </section>
   );
 };

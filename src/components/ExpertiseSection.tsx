@@ -2,37 +2,42 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Code2, Globe, Server, Smartphone, Wrench, Layers,
-  Monitor, Database, BrainCircuit,
+  FileCode2, Coffee, Braces, Binary,
+  Atom, FileType, Palette, Layout,
+  ServerCog, Route, Database, CircleDot,
+  TabletSmartphone, Plug,
+  GitBranch, Github, Send, Compass, MonitorSmartphone,
 } from "lucide-react";
 
 type Category = "All" | "Languages" | "Frontend" | "Backend & APIs" | "Mobile" | "Tools";
 
 interface SkillItem {
   name: string;
+  icon: React.ElementType;
   categories: Category[];
 }
 
 const skills: SkillItem[] = [
-  { name: "Python", categories: ["Languages"] },
-  { name: "Java", categories: ["Languages"] },
-  { name: "JavaScript", categories: ["Languages"] },
-  { name: "C++", categories: ["Languages"] },
-  { name: "React.js", categories: ["Frontend"] },
-  { name: "HTML5", categories: ["Frontend"] },
-  { name: "CSS3", categories: ["Frontend"] },
-  { name: "Bootstrap", categories: ["Frontend"] },
-  { name: "Node.js", categories: ["Backend & APIs"] },
-  { name: "Express.js", categories: ["Backend & APIs"] },
-  { name: "Django REST", categories: ["Backend & APIs"] },
-  { name: "MongoDB", categories: ["Backend & APIs"] },
-  { name: "MySQL", categories: ["Backend & APIs"] },
-  { name: "Android (Java)", categories: ["Mobile"] },
-  { name: "Retrofit", categories: ["Mobile"] },
-  { name: "Git", categories: ["Tools"] },
-  { name: "GitHub", categories: ["Tools"] },
-  { name: "Postman", categories: ["Tools"] },
-  { name: "MongoDB Compass", categories: ["Tools"] },
-  { name: "Android Studio", categories: ["Tools"] },
+  { name: "Python", icon: FileCode2, categories: ["Languages"] },
+  { name: "Java", icon: Coffee, categories: ["Languages"] },
+  { name: "JavaScript", icon: Braces, categories: ["Languages"] },
+  { name: "C++", icon: Binary, categories: ["Languages"] },
+  { name: "React.js", icon: Atom, categories: ["Frontend"] },
+  { name: "HTML5", icon: FileType, categories: ["Frontend"] },
+  { name: "CSS3", icon: Palette, categories: ["Frontend"] },
+  { name: "Bootstrap", icon: Layout, categories: ["Frontend"] },
+  { name: "Node.js", icon: ServerCog, categories: ["Backend & APIs"] },
+  { name: "Express.js", icon: Route, categories: ["Backend & APIs"] },
+  { name: "Django REST", icon: Server, categories: ["Backend & APIs"] },
+  { name: "MongoDB", icon: Database, categories: ["Backend & APIs"] },
+  { name: "MySQL", icon: CircleDot, categories: ["Backend & APIs"] },
+  { name: "Android (Java)", icon: TabletSmartphone, categories: ["Mobile"] },
+  { name: "Retrofit", icon: Plug, categories: ["Mobile"] },
+  { name: "Git", icon: GitBranch, categories: ["Tools"] },
+  { name: "GitHub", icon: Github, categories: ["Tools"] },
+  { name: "Postman", icon: Send, categories: ["Tools"] },
+  { name: "MongoDB Compass", icon: Compass, categories: ["Tools"] },
+  { name: "Android Studio", icon: MonitorSmartphone, categories: ["Tools"] },
 ];
 
 const tabs: { label: Category; icon: React.ElementType }[] = [
@@ -42,13 +47,6 @@ const tabs: { label: Category; icon: React.ElementType }[] = [
   { label: "Backend & APIs", icon: Server },
   { label: "Mobile", icon: Smartphone },
   { label: "Tools", icon: Wrench },
-];
-
-const professionalExpertise = [
-  { icon: Monitor, title: "Full Stack Development", desc: "End-to-end web applications with modern frameworks and scalable architectures." },
-  { icon: Database, title: "Backend API Architecture", desc: "RESTful APIs, database design, and server-side logic with Node.js & Django." },
-  { icon: Smartphone, title: "Mobile + Web Solutions", desc: "Cross-platform mobile apps and responsive progressive web applications." },
-  { icon: BrainCircuit, title: "Machine Learning", desc: "Data-driven solutions with Python, model training, and intelligent automation." },
 ];
 
 const ExpertiseSection = () => {
@@ -71,26 +69,6 @@ const ExpertiseSection = () => {
         </h2>
         <div className="w-16 h-1 bg-primary rounded-full mb-10 mx-auto" />
       </motion.div>
-
-      {/* Professional Expertise Cards */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
-        {professionalExpertise.map((item, i) => (
-          <motion.div
-            key={item.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.4, delay: i * 0.1 }}
-            className="glass-card-hover p-6 text-center"
-          >
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 text-primary mb-4">
-              <item.icon size={24} />
-            </div>
-            <h4 className="font-semibold text-foreground text-sm mb-2">{item.title}</h4>
-            <p className="text-muted-foreground text-xs leading-relaxed">{item.desc}</p>
-          </motion.div>
-        ))}
-      </div>
 
       {/* Filter Tabs */}
       <div className="mb-10 overflow-x-auto scrollbar-hide -mx-4 px-4">
@@ -129,7 +107,7 @@ const ExpertiseSection = () => {
               className="glass-card-hover p-5 flex flex-col items-center justify-center text-center gap-3 min-h-[100px]"
             >
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
-                <Code2 size={20} />
+                <skill.icon size={20} />
               </div>
               <span className="text-sm font-medium text-foreground">{skill.name}</span>
             </motion.div>

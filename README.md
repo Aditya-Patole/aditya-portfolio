@@ -1,3 +1,9 @@
-# Welcome to your Lovable project
+# Aditya Patole | Full Stack Developer Portfolio
 
-TODO: Document your project here
+Portfolio of Aditya Patole – Full Stack Developer, Android Developer, and B.Tech Information Technology student showcasing projects, skills, achievements, and experience.
+
+## Tech Stack
+- React & Vite
+- TypeScript
+- Vanilla CSS & Tailwind CSS
+- Three.js & React Three Fiber

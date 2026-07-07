@@ -75,8 +75,9 @@ const SkillsSection = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.5, delay: ci * 0.15 }}
-            className="glass-card-hover p-6"
+            whileHover={{ y: -6, scale: 1.01 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="glass-card p-6 hover:border-primary/50 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.5),0_0_25px_hsl(var(--primary)/0.2)] transition-all duration-300"
           >
             <h3 className="text-lg font-semibold text-foreground mb-6">{cat.title}</h3>
             <div className="space-y-4">

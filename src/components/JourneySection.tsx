@@ -49,12 +49,12 @@ const JourneySection = () => {
           transition={{ duration: 0.5 }}
           className="text-xl font-semibold text-foreground mb-8 flex items-center gap-2 justify-center"
         >
-          <GraduationCap className="text-primary" size={24} />
+          <GraduationCap className="text-[#38bdf8]" size={24} />
           Education
         </motion.h3>
 
         <div className="relative max-w-2xl mx-auto ml-4 sm:ml-auto sm:pl-8">
-          <div className="absolute left-0 sm:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-secondary to-accent" />
+          <div className="absolute left-0 sm:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#38bdf8] via-[#8b5cf6] to-[#c084fc]" />
 
           <div className="space-y-10">
             {educationData.map((edu, i) => (
@@ -66,22 +66,33 @@ const JourneySection = () => {
                 transition={{ duration: 0.5, delay: i * 0.2 }}
                 className="relative pl-8"
               >
-                <div className="absolute left-0 top-2 -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background shadow-[0_0_12px_hsl(var(--primary)/0.5)]" />
+                <div className="absolute left-0 top-2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#38bdf8] border-4 border-[#0f172a] shadow-[0_0_12px_rgba(56,189,248,0.8)]" />
 
-                <div className="glass-card-hover p-6">
-                  <h4 className="text-lg font-semibold text-foreground mb-1">{edu.degree}</h4>
-                  <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground mb-3">
-                    <span className="flex items-center gap-1">
-                      <MapPin size={14} className="text-secondary" />
-                      {edu.institute}
+                <motion.div
+                  whileHover={{ y: -6, scale: 1.01 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="group bg-[#0B1120]/95 backdrop-blur-xl rounded-[24px] p-6 sm:p-8 border border-[#1e3a8a]/50 hover:border-[#38bdf8]/60 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_40px_rgba(56,189,248,0.18)] transition-all duration-300 relative overflow-hidden"
+                >
+                  {/* Subtle top highlight glow */}
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#1e3a8a] via-[#38bdf8] to-[#c084fc] opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  <h4 className="text-lg sm:text-xl font-bold text-white group-hover:text-[#38bdf8] transition-colors duration-200 mb-2">
+                    {edu.degree}
+                  </h4>
+                  <div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-slate-400 mb-4 font-medium">
+                    <span className="flex items-center gap-1.5 text-[#38bdf8]">
+                      <MapPin size={15} />
+                      <span className="text-slate-300">{edu.institute}</span>
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Calendar size={14} className="text-accent" />
-                      {edu.duration}
+                    <span className="flex items-center gap-1.5 text-[#c084fc]">
+                      <Calendar size={15} />
+                      <span className="text-slate-300">{edu.duration}</span>
                     </span>
                   </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{edu.description}</p>
-                </div>
+                  <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+                    {edu.description}
+                  </p>
+                </motion.div>
               </motion.div>
             ))}
           </div>

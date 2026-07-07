@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GLB Inspector</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body style="background:#111;color:#0f0;font-family:monospace;padding:20px;white-space:pre-wrap;">
+<h2>GLB Model Inspector</h2>
+<div id="output">Loading desktop.glb...</div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const output = document.getElementById('output');
+function log(msg) {
+  output.textContent += '\n' + msg;
+}
+
+const loader = new GLTFLoader();
+loader.load('/desktop.glb', (gltf) => {
+  log('=== DESKTOP.GLB LOADED ===');
+  log('Scenes: ' + gltf.scenes.length);
+  log('Animations: ' + gltf.animations.length);
+  
+  let meshCount = 0;
+  let textureNames = new Set();
+  let materialNames = new Set();
+  
+  function traverse(obj, depth = 0) {
+    const indent = '  '.repeat(depth);
+    let info = `${indent}[${obj.type}] "${obj.name}"`;
+    if (obj.position) info += ` pos(${obj.position.x.toFixed(2)},${obj.position.y.toFixed(2)},${obj.position.z.toFixed(2)})`;
+    if (obj.scale) info += ` scale(${obj.scale.x.toFixed(2)},${obj.scale.y.toFixed(2)},${obj.scale.z.toFixed(2)})`;
+    
+    if (obj.isMesh) {
+      meshCount++;
+      const mat = obj.material;
+      if (mat) {
+        materialNames.add(mat.name || 'unnamed');
+        info += ` mat="${mat.name}" type=${mat.type}`;
+        
+        // Check all texture slots
+        ['map', 'normalMap', 'emissiveMap', 'roughnessMap', 'metalnessMap', 'aoMap', 'bumpMap'].forEach(slot => {
+          if (mat[slot]) {
+            const tex = mat[slot];
+            const texName = tex.name || tex.image?.src || 'embedded';
+            textureNames.add(texName);
+            info += `\n${indent}  -> ${slot}: "${texName}" (${tex.image?.width || '?'}x${tex.image?.height || '?'})`;
+            
+            // Check if image contains text by looking at source
+            if (tex.image && tex.image.src && (tex.image.src.includes('Abdhulla') || tex.image.src.includes('abdhulla'))) {
+              info += ' *** CONTAINS TARGET TEXT ***';
+            }
+          }
+        });
+        
+        // Check emissive
+        if (mat.emissive) {
+          info += `\n${indent}  -> emissive: rgb(${mat.emissive.r.toFixed(2)},${mat.emissive.g.toFixed(2)},${mat.emissive.b.toFixed(2)})`;
+        }
+      }
+      
+      // Check geometry
+      if (obj.geometry) {
+        const geo = obj.geometry;
+        info += `\n${indent}  -> vertices: ${geo.attributes.position?.count || 0}`;
+      }
+    }
+    
+    // Check for name containing target text
+    if (obj.name && (obj.name.toLowerCase().includes('abdh') || obj.name.toLowerCase().includes('text') || obj.name.toLowerCase().includes('name') || obj.name.toLowerCase().includes('screen') || obj.name.toLowerCase().includes('monitor') || obj.name.toLowerCase().includes('display'))) {
+      info += ' <<< POTENTIAL TARGET >>>';
+    }
+    
+    log(info);
+    
+    obj.children.forEach(child => traverse(child, depth + 1));
+  }
+  
+  traverse(gltf.scene);
+  
+  log('\n=== SUMMARY ===');
+  log('Total meshes: ' + meshCount);
+  log('Materials: ' + [...materialNames].join(', '));
+  log('Textures: ' + [...textureNames].join(', '));
+  
+  // Now try to find textures with text by drawing them to canvas
+  log('\n=== SCANNING TEXTURES FOR TEXT ===');
+  gltf.scene.traverse((obj) => {
+    if (obj.isMesh && obj.material) {
+      const mat = obj.material;
+      ['map', 'emissiveMap'].forEach(slot => {
+        if (mat[slot] && mat[slot].image) {
+          const img = mat[slot].image;
+          if (img.width > 100) {
+            log(`Texture on "${obj.name}" (${slot}): ${img.width}x${img.height}`);
+          }
+        }
+      });
+    }
+  });
+  
+}, (progress) => {
+  if (progress.total) {
+    log('Loading: ' + Math.round(progress.loaded / progress.total * 100) + '%');
+  }
+}, (error) => {
+  log('ERROR: ' + error.message);
+});
+</script>
+</body>
+</html>

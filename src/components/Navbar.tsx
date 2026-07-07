@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Download } from "lucide-react";
+const resumePdf = "/imp_files/Resume.pdf";
 
 const navItems = [
   { label: "About", href: "#about" },
   { label: "Journey", href: "#journey" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
-  { label: "Exploring", href: "#exploring" },
+  { label: "Certifications", href: "#certifications" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -33,7 +34,9 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="#"
+            href={resumePdf}
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-primary-gradient inline-flex items-center gap-2 !px-4 !py-2 text-sm"
           >
             <Download size={15} />
@@ -71,7 +74,9 @@ const Navbar = () => {
                 </a>
               ))}
               <a
-                href="#"
+                href={resumePdf}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
                 className="btn-primary-gradient inline-flex items-center gap-2 justify-center text-sm"
               >

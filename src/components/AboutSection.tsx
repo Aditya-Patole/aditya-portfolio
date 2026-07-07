@@ -26,45 +26,64 @@ const AboutSection = () => {
       </motion.div>
 
       <div className="grid lg:grid-cols-2 gap-12 items-start">
+        {/* Left summary tab/card */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="glass-card p-8 space-y-4"
+          whileHover={{ y: -6, scale: 1.01 }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+          className="group bg-[#0B1120]/95 backdrop-blur-xl rounded-[24px] p-8 border border-[#1e3a8a]/50 hover:border-[#38bdf8]/60 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_40px_rgba(56,189,248,0.18)] transition-all duration-300 relative overflow-hidden space-y-4"
         >
-          <h3 className="text-xl font-semibold text-foreground">My Journey</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            I'm a passionate Full Stack Developer who fell in love with programming through
-            building small tools and automating everyday tasks. What started as curiosity
-            quickly turned into a career dedicated to crafting meaningful digital products.
+          {/* Subtle top highlight glow */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#1e3a8a] via-[#38bdf8] to-[#c084fc] opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
+
+          <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#38bdf8] transition-colors duration-200">
+            My Journey
+          </h3>
+          <p className="text-slate-400 leading-relaxed text-sm sm:text-base">
+            I’m a passionate Full Stack Developer specializing in the MERN stack and 
+            Android development, focused on building impactful solutions that address 
+            real-world problems. I enjoy turning ideas into scalable web and mobile 
+            applications that deliver seamless and engaging user experiences.
           </p>
-          <p className="text-muted-foreground leading-relaxed">
-            Today, I focus on building modern web applications with React, Node.js, and
-            cloud technologies. I believe the best software is built at the intersection
-            of great engineering and thoughtful design.
+          <p className="text-slate-400 leading-relaxed text-sm sm:text-base">
+            With hands-on experience in developing interactive systems, including 
+            AR-based applications, I aim to create products that are both innovative 
+            and user-centric. My approach blends strong technical skills with thoughtful 
+            design, ensuring that every solution is efficient, intuitive, and reliable.
           </p>
-          <p className="text-muted-foreground leading-relaxed">
-            When I'm not coding, you'll find me exploring open-source projects, learning
-            about system design, or experimenting with new frameworks and tools.
+          <p className="text-slate-400 leading-relaxed text-sm sm:text-base">
+            From crafting responsive user interfaces to designing scalable backend systems 
+            and integrating modern technologies, I am committed to delivering high-quality 
+            solutions that create real value and meaningful user impact.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 gap-4">
+        {/* Right expertise grid tabs/cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {professionalExpertise.map((item, i) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: 0.1 * i }}
-              className="glass-card-hover p-6 text-center"
+              whileHover={{ y: -6, scale: 1.01 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="group bg-[#0B1120]/95 backdrop-blur-xl rounded-[24px] p-6 text-center min-h-[220px] border border-[#1e3a8a]/50 hover:border-[#38bdf8]/60 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_40px_rgba(56,189,248,0.18)] transition-all duration-300 relative overflow-hidden flex flex-col items-center justify-center"
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 text-primary mb-3">
-                <item.icon size={24} />
+              {/* Subtle top highlight glow */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#1e3a8a] via-[#38bdf8] to-[#c084fc] opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
+
+              <div className="w-14 h-14 rounded-[18px] bg-[#172554]/80 border border-[#1e3a8a]/50 flex items-center justify-center text-[#38bdf8] mb-4 shadow-inner group-hover:scale-110 transition-transform duration-300 shrink-0">
+                <item.icon size={28} />
               </div>
-              <h4 className="font-semibold text-foreground text-sm mb-1">{item.title}</h4>
-              <p className="text-muted-foreground text-xs">{item.desc}</p>
+              <h4 className="font-bold text-white group-hover:text-[#38bdf8] transition-colors duration-200 text-lg mb-2">
+                {item.title}
+              </h4>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                {item.desc}
+              </p>
             </motion.div>
           ))}
         </div>

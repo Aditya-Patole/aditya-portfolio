@@ -6,6 +6,13 @@ interface Education {
   institute: string;
   duration: string;
   description: string;
+  titleColor: string;
+  descColor: string;
+  dotColor: string;
+  borderColor: string;
+  hoverBorderColor: string;
+  glowShadow: string;
+  topGlow: string;
 }
 
 const educationData: Education[] = [
@@ -14,12 +21,26 @@ const educationData: Education[] = [
     institute: "Walchand College of Engineering, Sangli",
     duration: "2025 - Present",
     description: "Pursuing Bachelor's degree with focus on software development, algorithms, and modern web technologies.",
+    titleColor: "text-[#38bdf8] group-hover:text-[#7dd3fc]",
+    descColor: "text-[#cbd5e1] group-hover:text-[#f8fafc]",
+    dotColor: "bg-[#38bdf8] shadow-[0_0_12px_rgba(56,189,248,0.8)]",
+    borderColor: "border-[#1e3a8a]/50",
+    hoverBorderColor: "hover:border-[#38bdf8]/60",
+    glowShadow: "hover:shadow-[0_12px_40px_rgba(56,189,248,0.18)]",
+    topGlow: "from-[#1e3a8a] via-[#38bdf8] to-[#7dd3fc]",
   },
   {
     degree: "Diploma in Computer Engineering",
     institute: "Government Polytechnic, Miraj",
     duration: "2022 - 2025",
     description: "Completed diploma with strong foundation in computer science fundamentals and programming.",
+    titleColor: "text-[#c084fc] group-hover:text-[#e879f9]",
+    descColor: "text-[#cbd5e1] group-hover:text-[#f8fafc]",
+    dotColor: "bg-[#c084fc] shadow-[0_0_12px_rgba(192,132,252,0.8)]",
+    borderColor: "border-[#581c87]/50",
+    hoverBorderColor: "hover:border-[#c084fc]/60",
+    glowShadow: "hover:shadow-[0_12px_40px_rgba(192,132,252,0.18)]",
+    topGlow: "from-[#6b21a8] via-[#c084fc] to-[#e879f9]",
   },
 ];
 
@@ -66,17 +87,17 @@ const JourneySection = () => {
                 transition={{ duration: 0.5, delay: i * 0.2 }}
                 className="relative pl-8"
               >
-                <div className="absolute left-0 top-2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#38bdf8] border-4 border-[#0f172a] shadow-[0_0_12px_rgba(56,189,248,0.8)]" />
+                <div className={`absolute left-0 top-2 -translate-x-1/2 w-4 h-4 rounded-full ${edu.dotColor} border-4 border-[#0f172a]`} />
 
                 <motion.div
                   whileHover={{ y: -6, scale: 1.01 }}
                   transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="group bg-[#0B1120]/95 backdrop-blur-xl rounded-[24px] p-6 sm:p-8 border border-[#1e3a8a]/50 hover:border-[#38bdf8]/60 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_40px_rgba(56,189,248,0.18)] transition-all duration-300 relative overflow-hidden"
+                  className={`group bg-[#0B1120]/95 backdrop-blur-xl rounded-[24px] p-6 sm:p-8 border ${edu.borderColor} ${edu.hoverBorderColor} shadow-[0_8px_30px_rgba(0,0,0,0.4)] ${edu.glowShadow} transition-all duration-300 relative overflow-hidden`}
                 >
                   {/* Subtle top highlight glow */}
-                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#1e3a8a] via-[#38bdf8] to-[#c084fc] opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${edu.topGlow} opacity-50 group-hover:opacity-100 transition-opacity duration-300`} />
 
-                  <h4 className="text-lg sm:text-xl font-bold text-white group-hover:text-[#38bdf8] transition-colors duration-200 mb-2">
+                  <h4 className={`text-lg sm:text-xl font-extrabold ${edu.titleColor} transition-colors duration-200 mb-2`}>
                     {edu.degree}
                   </h4>
                   <div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-slate-400 mb-4 font-medium">
@@ -89,7 +110,7 @@ const JourneySection = () => {
                       <span className="text-slate-300">{edu.duration}</span>
                     </span>
                   </div>
-                  <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+                  <p className={`${edu.descColor} text-sm sm:text-base leading-relaxed transition-colors duration-200`}>
                     {edu.description}
                   </p>
                 </motion.div>

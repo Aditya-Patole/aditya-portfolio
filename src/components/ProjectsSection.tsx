@@ -287,26 +287,24 @@ const ProjectsSection = () => {
       </motion.div>
 
       {/* Filter Tabs */}
-      <div className="mb-10 overflow-x-auto scrollbar-hide -mx-4 px-4">
-        <div className="flex gap-2 justify-center min-w-max">
-          {tabs.map((tab) => {
-            const isActive = active === tab.label;
-            return (
-              <button
-                key={tab.label}
-                onClick={() => setActive(tab.label)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 whitespace-nowrap ${
-                  isActive
-                    ? "bg-primary text-primary-foreground shadow-[0_0_20px_hsl(var(--primary)/0.3)]"
-                    : "glass-card text-muted-foreground hover:text-foreground hover:border-primary/30"
-                }`}
-              >
-                <tab.icon size={16} />
-                {tab.label}
-              </button>
-            );
-          })}
-        </div>
+      <div className="mb-10 flex flex-wrap gap-2 justify-center">
+        {tabs.map((tab) => {
+          const isActive = active === tab.label;
+          return (
+            <button
+              key={tab.label}
+              onClick={() => setActive(tab.label)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+                isActive
+                  ? "bg-primary text-primary-foreground shadow-[0_0_20px_hsl(var(--primary)/0.3)]"
+                  : "glass-card text-muted-foreground hover:text-foreground hover:border-primary/30"
+              }`}
+            >
+              <tab.icon size={16} />
+              {tab.label}
+            </button>
+          );
+        })}
       </div>
 
       {/* Projects Grid */}
